@@ -1,4 +1,6 @@
-### Get the Flutter SDK
+### Install
+
+#### Get the Flutter SDK
 
 1. Download the SDK and unzip it. 
 2. Setup the environment path.
@@ -26,4 +28,34 @@ The Dart SDK is bundled with Flutter; it is not necessary to install Dart separa
 
 3. Make sure the Xcode license agreement is signed by either opening Xcode once and confirming or running `sudo xcodebuild -license` from the command line.
 
-### 
+#### Deploy to iOS devices(To be Read)
+
+[Link](https://flutter.dev/docs/get-started/install/macos#deploy-to-ios-devices)
+
+####  Android setup
+
+### Set up an editor
+
+Open the Command Palette (Ctrl+Shift+P (Cmd+Shift+P on macOS)) in VS Code
+
+### Test drive
+
+#### Try hot reload
+
+Flutter offers a fast development cycle with Stateful Hot Reload, the ability to reload the code of a live running app without restarting or losing app state.
+
+#### Profile or release runs
+
+Debug mode trades performance for useful developer features such as hot reload and step debugging.
+
+### Write your first Flutter app, part 1
+
+####  Step 1: Create the starter Flutter app
+
+#### Observations
+
+- arrow (`=>`) notation. Use arrow notation for one-line functions or methods.
+- Everything is a widget.
+- The `Scaffold` widget, from the Material library, provides a default app bar, title, and a body property that holds the widget tree for the home screen.
+- A widget’s main job is to provide a build() method that describes how to display the widget in terms of other, lower level widgets.
+
