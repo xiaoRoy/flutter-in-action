@@ -101,5 +101,15 @@ final index = i ~/ 2; //The expression i ~/ 2 divides i by 2 and returns an inte
 
 #### Add interactivity
 
+In Flutter's reactive style framework, calling setState() triggers a call to the build() method for the State object, resulting in an update to the UI.
 
+#### Navigate to a new screen
+
+__Route and Navigator__
+
+A page is called route in Flutter.
+
+In Flutter, the Navigator manages a stack containing the app's routes. Pushing a route onto the Navigator's stack, updates the display to that route. Popping a route from the Navigator's stack, returns the display to the previous route.
+
+#### Change the UI using Themes
 

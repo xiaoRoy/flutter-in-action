@@ -48,8 +48,43 @@ class RandomWordsState extends State<RandomWords> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Startup Name Generator"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.list),
+            onPressed: _pushSaved,
+          )
+        ],
       ),
       body: _buildSuggesionList(),
+    );
+  }
+
+  void _pushSaved() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext builderContext) {
+          final Iterable<ListTile> titles = _savedWordPairs.map(
+            (WordPair wordPair) {
+              return ListTile(
+                title: Text(
+                  wordPair.asPascalCase,
+                  style: _biggerFont,
+                ),
+              );
+            }
+          );
+          final List<Widget> dividedWordPairs = ListTile.divideTiles(
+            context: builderContext,
+            tiles: titles
+          ).toList();
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Saved Suggestions'),
+            ),
+            body: ListView(children: dividedWordPairs),
+          );
+        }
+      )
     );
   }
 
@@ -64,9 +99,9 @@ class RandomWordsState extends State<RandomWords> {
         isSaved ? Icons.favorite : Icons.favorite_border,
         color: isSaved ? Colors.red : null,
       ),
-      onTap: (){
+      onTap: () {
         setState(() {
-          if(isSaved) {
+          if (isSaved) {
             _savedWordPairs.remove(wordPair);
           } else {
             _savedWordPairs.add(wordPair);
