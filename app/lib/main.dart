@@ -29,7 +29,12 @@ class MyApp extends StatelessWidget {
 class StarterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: RandomWords());
+    return MaterialApp(
+      home: RandomWords(),
+      theme: ThemeData(
+        primaryColor: Colors.white
+      ),
+      );
   }
 }
 

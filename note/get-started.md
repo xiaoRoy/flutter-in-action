@@ -113,3 +113,4 @@ In Flutter, the Navigator manages a stack containing the app's routes. Pushing a
 
 #### Change the UI using Themes
 
+You can easily change an app's theme by configuring the `ThemeData` class.
