@@ -61,6 +61,40 @@ class ChatSceenState extends State<ChatScreen> {
   }
 }
 
+const String _userName = 'Smith';
+
+class ChatMessage extends StatelessWidget {
+  final String message;
+  ChatMessage({this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            margin: const EdgeInsets.only(right: 16.0),
+            child: CircleAvatar(child: Text(_userName[0]),),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(_userName, style: Theme.of(context).textTheme.subhead),
+              Container(
+                margin: const EdgeInsets.only(top: 5.0),
+                child: Text(message),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+}
+
 class ChatSceenB extends StatelessWidget {
   //for the StateLessWidget
   @override

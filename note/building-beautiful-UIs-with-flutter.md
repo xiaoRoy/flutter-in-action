@@ -31,6 +31,8 @@ In Dart syntax, the fat arrow function declaration => expression is shorthand fo
 
 __IconTheme__
 
+To give the icons in your app an accent color, pass the color argument to IconButton. Alternatively, you can apply a different theme.
+
 Icons inherit their color, opacity, and size from an IconTheme widget, which uses an IconThemeData object to define these characteristics
 
 __Build Context__
