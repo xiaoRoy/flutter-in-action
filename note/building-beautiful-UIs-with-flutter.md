@@ -29,6 +29,8 @@ In Dart syntax, the fat arrow function declaration => expression is shorthand fo
 
 (only use in the single statement method ?)
 
+Naming the argument `_` (underscore) is a convention to indicate that it won't be used.
+
 __IconTheme__
 
 To give the icons in your app an accent color, pass the color argument to IconButton. Alternatively, you can apply a different theme.
@@ -38,6 +40,10 @@ Icons inherit their color, opacity, and size from an IconTheme widget, which use
 __Build Context__
 
 A __BuildContext__ object is a handle to the location of a widget in your app's widget tree. Each widget has its own BuildContext, which becomes the parent of the widget returned by the StatelessWidget.build or State.build function. This means the _buildTextComposer() method can access the BuildContext object from its encapsulating State object; you don't need to pass the context to the method explicitly.
+
+__`setState()`__
+
+Only synchronous operations should be performed in `setState()`, because otherwise the framework could rebuild the widgets before the operation finishes.
 
 __More About Widget__
 

@@ -15,8 +15,8 @@ class ChatScreen extends StatefulWidget {
 }
 
 class ChatSceenState extends State<ChatScreen> {
-  final TextEditingController _textEditingController =
-      new TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
+  final List<ChatMessage> _chatMessages = <ChatMessage>[];
 
   Widget _buildTextComposer() {
     return IconTheme(
@@ -48,6 +48,10 @@ class ChatSceenState extends State<ChatScreen> {
 
   void _handleSummitted(String text) {
     _textEditingController.clear();
+    ChatMessage message = ChatMessage(message: text);
+    setState(() {
+      _chatMessages.insert(0, message);
+    }) ;
   }
 
   @override
@@ -56,7 +60,25 @@ class ChatSceenState extends State<ChatScreen> {
       appBar: AppBar(
         title: Text('Friendly Chat'),
       ),
-      body: _buildTextComposer(),
+      body: Column(
+        children: <Widget>[
+          Flexible(
+            child: ListView.builder(
+              padding: EdgeInsets.all(8.0),
+              reverse: true,
+              itemBuilder: (_, index) => _chatMessages[index],
+              itemCount: _chatMessages.length,
+            ),
+          ),
+          Divider(height: 1.0),
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor
+            ),
+            child: _buildTextComposer(),
+          )
+        ],
+      ),
     );
   }
 }
