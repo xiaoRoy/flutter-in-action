@@ -14,7 +14,7 @@ class ChatScreen extends StatefulWidget {
   }
 }
 
-class ChatSceenState extends State<ChatScreen> {
+class ChatSceenState extends State<ChatScreen> with TickerProviderStateMixin {
   final TextEditingController _textEditingController = TextEditingController();
   final List<ChatMessage> _chatMessages = <ChatMessage>[];
 
@@ -48,10 +48,17 @@ class ChatSceenState extends State<ChatScreen> {
 
   void _handleSummitted(String text) {
     _textEditingController.clear();
-    ChatMessage message = ChatMessage(message: text);
+    ChatMessage message = ChatMessage(
+      message: text,
+      animationController: AnimationController(
+        duration: Duration(milliseconds: 700),
+        vsync: this
+      ),
+    );
     setState(() {
       _chatMessages.insert(0, message);
-    }) ;
+    });
+    message.animationController.forward();
   }
 
   @override
@@ -72,9 +79,7 @@ class ChatSceenState extends State<ChatScreen> {
           ),
           Divider(height: 1.0),
           Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor
-            ),
+            decoration: BoxDecoration(color: Theme.of(context).cardColor),
             child: _buildTextComposer(),
           )
         ],
@@ -87,7 +92,8 @@ const String _userName = 'Smith';
 
 class ChatMessage extends StatelessWidget {
   final String message;
-  ChatMessage({this.message});
+  final AnimationController animationController;
+  ChatMessage({this.message, this.animationController});
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +104,9 @@ class ChatMessage extends StatelessWidget {
         children: <Widget>[
           Container(
             margin: const EdgeInsets.only(right: 16.0),
-            child: CircleAvatar(child: Text(_userName[0]),),
+            child: CircleAvatar(
+              child: Text(_userName[0]),
+            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +122,6 @@ class ChatMessage extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class ChatSceenB extends StatelessWidget {

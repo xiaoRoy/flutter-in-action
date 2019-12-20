@@ -10,7 +10,9 @@ __State__ is information that can be read synchronously when the widget is built
 
 In Flutter, if you want to visually present stateful data in a widget, you should encapsulate this data in a __State__ object. You can then associate your State object with a widget that extends the StatefulWidget class.
 
-#### Add a responsive Send button
+#### Add a UI for displaying messages
+
+##### Add a responsive Send button
 
 __Row class__, A widget that displays its children in a horizontal array. [API Doc](https://api.flutter.dev/flutter/widgets/Row-class.html)
 
@@ -44,6 +46,18 @@ A __BuildContext__ object is a handle to the location of a widget in your app's 
 __`setState()`__
 
 Only synchronous operations should be performed in `setState()`, because otherwise the framework could rebuild the widgets before the operation finishes.
+
+#### Animate your app
+
+__Specify an animation controller__
+
+Animations in Flutter are encapsulated as Animation objects that contain a typed value and a status (such as forward, backward, completed, and dismissed). You can attach an animation object to a widget or listen for changes to the animation object. Based on changes to the animation object's properties, the framework can modify the way your widget appears and rebuild the widget tree.
+
+When creating an `AnimationController`, you must pass it a `vsync` argument. The `vsync` prevents animations that are offscreen from consuming unnecessary resources. To use your `ChatScreenState` as the `vsync`, include a `TickerProviderStateMixin` mixin in the `ChatScreenState` class definition.
+
+`class ChatSceenState extends State<ChatScreen> with TickerProviderStateMixin`
+
+ In Dart, a mixin allows a class body to be reused in multiple class hierarchies.
 
 __More About Widget__
 
