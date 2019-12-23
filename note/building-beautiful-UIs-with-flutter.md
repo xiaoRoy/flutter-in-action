@@ -59,6 +59,14 @@ When creating an `AnimationController`, you must pass it a `vsync` argument. The
 
  In Dart, a mixin allows a class body to be reused in multiple class hierarchies.
 
+#### Add a SizeTransition widget
+
+SizeTransition - It inherts from AnimatedWidget which is a StatefulWidget.
+
+#### Dispose the animation
+
+dispose method - The framework calls this method when this `State` object will never build again.
+
 __More About Widget__
 
 [Flutter Widget of the Week](https://www.youtube.com/watch?v=CI7x0mAZiY0)
