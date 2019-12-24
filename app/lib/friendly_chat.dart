@@ -17,6 +17,7 @@ class ChatScreen extends StatefulWidget {
 class ChatSceenState extends State<ChatScreen> with TickerProviderStateMixin {
   final TextEditingController _textEditingController = TextEditingController();
   final List<ChatMessage> _chatMessages = <ChatMessage>[];
+  bool _isComposing = false;
 
   Widget _buildTextComposer() {
     return IconTheme(
@@ -29,6 +30,11 @@ class ChatSceenState extends State<ChatScreen> with TickerProviderStateMixin {
                 child: TextField(
                   controller: _textEditingController,
                   onSubmitted: _handleSummitted,
+                  onChanged: (String text) {
+                    setState(() {
+                      _isComposing = text.length > 0;
+                    });
+                  },
                   decoration:
                       InputDecoration.collapsed(hintText: "Sent a message"),
                 ),
@@ -37,8 +43,9 @@ class ChatSceenState extends State<ChatScreen> with TickerProviderStateMixin {
                 margin: EdgeInsets.symmetric(horizontal: 4.0),
                 child: IconButton(
                   icon: Icon(Icons.send),
-                  onPressed: () =>
-                      _handleSummitted(_textEditingController.text),
+                  onPressed: _isComposing
+                      ? () => _handleSummitted(_textEditingController.text)
+                      : null,
                 ),
               ),
             ],
@@ -48,6 +55,9 @@ class ChatSceenState extends State<ChatScreen> with TickerProviderStateMixin {
 
   void _handleSummitted(String text) {
     _textEditingController.clear();
+    setState(() {
+      _isComposing = false;
+    });
     ChatMessage message = ChatMessage(
       message: text,
       animationController: AnimationController(
@@ -87,7 +97,7 @@ class ChatSceenState extends State<ChatScreen> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    for(ChatMessage message in _chatMessages) {
+    for (ChatMessage message in _chatMessages) {
       message.animationController.dispose();
     }
     super.dispose();
@@ -104,10 +114,8 @@ class ChatMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizeTransition(
-      sizeFactor: CurvedAnimation(
-        parent: animationController, 
-        curve: Curves.easeOut
-        ),
+      sizeFactor:
+          CurvedAnimation(parent: animationController, curve: Curves.easeOut),
       axisAlignment: 0.0,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10.0),
