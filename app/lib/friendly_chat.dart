@@ -128,15 +128,17 @@ class ChatMessage extends StatelessWidget {
                 child: Text(_userName[0]),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(_userName, style: Theme.of(context).textTheme.subhead),
-                Container(
-                  margin: const EdgeInsets.only(top: 5.0),
-                  child: Text(message),
-                ),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(_userName, style: Theme.of(context).textTheme.subhead),
+                  Container(
+                    margin: const EdgeInsets.only(top: 5.0),
+                    child: Text(message),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

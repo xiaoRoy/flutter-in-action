@@ -77,7 +77,7 @@ If this is set to null, the button will be disabled.
 
 ##### Wrap longer lines
 
-`Expanded` widget- A widget that expands a child of a Row, Column, or Flex so that the child fills the available space.
+`Expanded` widget- A widget that expands a child of a Row, Column, or Flex so that the child fills the available space. Expanded allows a widget like Column to impose layout constraints (in this case the Column's width), on a child widget.
 
 __More About Widget__
 
