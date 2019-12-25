@@ -79,6 +79,22 @@ If this is set to null, the button will be disabled.
 
 `Expanded` widget- A widget that expands a child of a Row, Column, or Flex so that the child fills the available space. Expanded allows a widget like Column to impose layout constraints (in this case the Column's width), on a child widget.
 
+##### Customize for iOS and Android
+
+defaultTargetPlatform top-level property
+
+The TargetPlatform that matches the platform on which the framework is currently executing.
+
+This is the default value of ThemeData.platform. Widgets from the material library should use Theme.of to determine the current platform for styling purposes, rather than using defaultTargetPlatform. 
+
+#### Next Step
+
+[Flutter Code Labs](https://codelabs.developers.google.com/?cat=Flutter)
+
+[Flutter Sample Apps](https://github.com/flutter/flutter/tree/master/examples)
+
+[Flutter Sampls](https://github.com/flutter/samples)
+
 __More About Widget__
 
 [Flutter Widget of the Week](https://www.youtube.com/watch?v=CI7x0mAZiY0)
