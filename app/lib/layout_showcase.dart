@@ -23,13 +23,44 @@ class LayoutShowcaseScreen extends StatelessWidget {
       ),
       body: Container(
         color: Colors.yellowAccent,
-        child: FlexibleBlueBoxRows(),
+        child: FlexibleBlueBoxRow(),
       ),
     );
   }
 }
 
-class FlexibleBlueBoxRows extends StatelessWidget {
+class BlueBoxColumn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        BlueBox(),
+        BlueBox(),
+        BlueBox(),
+      ],
+    );
+  }
+}
+
+class ExpandedBlueBoxRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        BlueBox(),
+        Expanded(
+          child: BlueBox(),
+        ),
+        Expanded(
+          child: BlueBox(),
+        ),
+      ],
+    );
+  }
+}
+
+class FlexibleBlueBoxRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -37,12 +68,12 @@ class FlexibleBlueBoxRows extends StatelessWidget {
         BlueBox(),
         Flexible(
           fit: FlexFit.tight,
-          flex: 1,
+          flex: 2,
           child: BlueBox(),
         ),
         Flexible(
           fit: FlexFit.loose,
-          flex: 1,
+          flex: 2,
           child: BlueBox(),
         ),
       ],
@@ -51,7 +82,7 @@ class FlexibleBlueBoxRows extends StatelessWidget {
 }
 
 
-class FixedBlueBoxRows extends StatelessWidget {
+class FixedBlueBoxRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
