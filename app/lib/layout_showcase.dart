@@ -23,8 +23,29 @@ class LayoutShowcaseScreen extends StatelessWidget {
       ),
       body: Container(
         color: Colors.yellowAccent,
-        child: FlexibleBlueBoxRow(),
+        child: SizedBoxRow(),
       ),
+    );
+  }
+}
+
+class SizedBoxRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        BlueBox(),
+        SizedBox(
+          width: 50,
+          height: 50,
+          child: BlueBox(),
+        ),
+        BlueBox(),
+        SizedBox(width: 50,),
+        BlueBox(),
+        SizedBox(width: 25,),
+        BlueBox(),
+      ],
     );
   }
 }
