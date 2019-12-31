@@ -23,13 +23,49 @@ class LayoutShowcaseScreen extends StatelessWidget {
       ),
       body: Container(
         color: Colors.yellowAccent,
-        child: SpacerBowRow(),
+        child: SpacerBlueBoxRow(),
       ),
     );
   }
 }
 
-class SpacerBowRow extends StatelessWidget {
+class TextRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      textBaseline: TextBaseline.alphabetic,
+      children: <Widget>[
+        Text(
+          'Hey!', 
+          style: TextStyle(
+            fontSize: 30,
+            fontFamily: 'Futura',
+            color: Colors.blue,
+          ),
+        ),
+        Text(
+          'Hey!', 
+          style: TextStyle(
+            fontSize: 50,
+            fontFamily: 'Futura',
+            color: Colors.green,
+          ),
+        ),
+        Text(
+          'Hey!', 
+          style: TextStyle(
+            fontSize: 40,
+            fontFamily: 'Futura',
+            color: Colors.red,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class SpacerBlueBoxRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
