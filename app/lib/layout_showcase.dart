@@ -23,8 +23,33 @@ class LayoutShowcaseScreen extends StatelessWidget {
       ),
       body: Container(
         color: Colors.yellowAccent,
-        child: SpacerBlueBoxRow(),
+        child: IconRow(),
       ),
+    );
+  }
+}
+
+class IconRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Icon(
+          Icons.widgets,
+          size: 50,
+          color: Colors.blue,
+        ),
+        Icon(
+          Icons.widgets,
+          size: 50,
+          color: Colors.red,
+        ),
+        Icon(
+          Icons.work,
+          size: 50,
+          color: Colors.lightBlue,
+        ),
+      ],
     );
   }
 }
@@ -33,7 +58,7 @@ class TextRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       textBaseline: TextBaseline.alphabetic,
       children: <Widget>[
         Text(
