@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/material.dart';
 
 class LayoutShowcaseApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +10,6 @@ class LayoutShowcaseApp extends StatelessWidget {
   }
 }
 
-
 class LayoutShowcaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,24 +18,77 @@ class LayoutShowcaseScreen extends StatelessWidget {
         title: Text('Layout Shwocase'),
       ),
       body: Container(
-        color: Colors.yellowAccent,
-        child: ImageRow(),
+        // color: Colors.yellowAccent,
+        child: ContactWidget(),
       ),
     );
   }
 }
 
-class ImageRow extends StatelessWidget {
+class ContactWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.account_circle,
+              ),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Flutter McFlutter',
+                  style: Theme.of(context).textTheme.headline,
+                ),
+                Text('Experienced App Developer'),
+              ],
+            )
+          ],
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text('123 Main Street'),
+            Text('(014) 555-0198'),
+          ],
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Icon(Icons.accessibility),
+            Icon(Icons.timer),
+            Icon(Icons.phone_android),
+            Icon(Icons.phone_iphone),
+          ],
+        )
+      ],
+    );
+  }
+}
 
-  static const _url = 'https://github.com/flutter/website/blob/master/examples/layout/sizing/images/pic2.jpg?raw=true';
+class ImageRow extends StatelessWidget {
+  static const _url =
+      'https://github.com/flutter/website/blob/master/examples/layout/sizing/images/pic2.jpg?raw=true';
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Image.network(_url)
-      ],
+      children: <Widget>[Image.network(_url)],
     );
   }
 }
@@ -77,7 +126,7 @@ class TextRow extends StatelessWidget {
       textBaseline: TextBaseline.alphabetic,
       children: <Widget>[
         Text(
-          'Hey!', 
+          'Hey!',
           style: TextStyle(
             fontSize: 30,
             fontFamily: 'Futura',
@@ -85,7 +134,7 @@ class TextRow extends StatelessWidget {
           ),
         ),
         Text(
-          'Hey!', 
+          'Hey!',
           style: TextStyle(
             fontSize: 50,
             fontFamily: 'Futura',
@@ -93,7 +142,7 @@ class TextRow extends StatelessWidget {
           ),
         ),
         Text(
-          'Hey!', 
+          'Hey!',
           style: TextStyle(
             fontSize: 40,
             fontFamily: 'Futura',
@@ -111,9 +160,13 @@ class SpacerBlueBoxRow extends StatelessWidget {
     return Row(
       children: <Widget>[
         BlueBox(),
-        Spacer(flex: 1,),
+        Spacer(
+          flex: 1,
+        ),
         BlueBox(),
-        Spacer(flex: 1,),
+        Spacer(
+          flex: 1,
+        ),
         BlueBox(),
       ],
     );
@@ -132,9 +185,13 @@ class SizedBoxRow extends StatelessWidget {
           child: BlueBox(),
         ),
         BlueBox(),
-        SizedBox(width: 50,),
+        SizedBox(
+          width: 50,
+        ),
         BlueBox(),
-        SizedBox(width: 25,),
+        SizedBox(
+          width: 25,
+        ),
         BlueBox(),
       ],
     );
@@ -193,7 +250,6 @@ class FlexibleBlueBoxRow extends StatelessWidget {
   }
 }
 
-
 class FixedBlueBoxRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -213,12 +269,12 @@ class BlueBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-       width: 50.0,
-       height: 50.0,
-       decoration: BoxDecoration(
-         color: Colors.blue,
-         border: Border.all(),
-       ),
+      width: 50.0,
+      height: 50.0,
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        border: Border.all(),
+      ),
     );
   }
 }
