@@ -23,8 +23,23 @@ class LayoutShowcaseScreen extends StatelessWidget {
       ),
       body: Container(
         color: Colors.yellowAccent,
-        child: IconRow(),
+        child: ImageRow(),
       ),
+    );
+  }
+}
+
+class ImageRow extends StatelessWidget {
+
+  static const _url = 'https://github.com/flutter/website/blob/master/examples/layout/sizing/images/pic2.jpg?raw=true';
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Image.network(_url)
+      ],
     );
   }
 }
