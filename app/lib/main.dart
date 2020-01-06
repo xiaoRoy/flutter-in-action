@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 // import 'package:app/friendly_chat.dart';
-import 'package:app/layout_showcase.dart';
-
-void main() => runApp(LayoutShowcaseApp());
+// import 'package:app/layout_showcase.dart';
+import 'package:app/introduction_to_widgets.dart';
+void main() => runApp(WidgetIntroductionApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
