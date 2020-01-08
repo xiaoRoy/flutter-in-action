@@ -9,7 +9,7 @@ class WidgetIntroductionApp extends StatelessWidget {
     return MaterialApp(
       title: 'Widget Introduction',
       home: Container(
-        child: CustomScaffold(),
+        child: WidgetIntroductionScreen(),
       ),
     );
   }
@@ -20,10 +20,29 @@ class WidgetIntroductionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Widget Introduction'),
+       leading: IconButton(
+         icon: Icon(Icons.menu),
+         tooltip: 'Navigation menu',
+         onPressed: null,
+       ),
+       title: Text('Widget Introductions'),
+       actions: <Widget>[
+         IconButton(
+           icon: Icon(Icons.search),
+           tooltip: 'Search',
+           onPressed: null,
+         ),
+       ],
       ),
       body: Container(
-        child: CustomScaffold(),
+        child: Center(
+          child: Text('Hello World!'),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        tooltip: 'Add',
+        child: Icon(Icons.add),
+        onPressed: null,
       ),
     );
   }
