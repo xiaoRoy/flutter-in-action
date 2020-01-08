@@ -36,7 +36,7 @@ class WidgetIntroductionScreen extends StatelessWidget {
       ),
       body: Container(
         child: Center(
-          child: Text('Hello World!'),
+          child: CustomButton(),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -44,6 +44,27 @@ class WidgetIntroductionScreen extends StatelessWidget {
         child: Icon(Icons.add),
         onPressed: null,
       ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Container(
+        height: 36.0,
+        padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.0),
+          color: Colors.lightGreen[500],
+        ),
+        child: Center(
+          child: Text('Engage'),
+        ),
+      ),
+      onTap: () => print('tappged'),
     );
   }
 }
