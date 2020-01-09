@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/material.dart';
 
 class WidgetIntroductionApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,23 +17,23 @@ class WidgetIntroductionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       leading: IconButton(
-         icon: Icon(Icons.menu),
-         tooltip: 'Navigation menu',
-         onPressed: null,
-       ),
-       title: Text('Widget Introductions'),
-       actions: <Widget>[
-         IconButton(
-           icon: Icon(Icons.search),
-           tooltip: 'Search',
-           onPressed: null,
-         ),
-       ],
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          tooltip: 'Navigation menu',
+          onPressed: null,
+        ),
+        title: Text('Widget Introductions'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            tooltip: 'Search',
+            onPressed: null,
+          ),
+        ],
       ),
       body: Container(
         child: Center(
-          child: CustomButton(),
+          child: _Counter(),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -44,6 +41,34 @@ class WidgetIntroductionScreen extends StatelessWidget {
         child: Icon(Icons.add),
         onPressed: null,
       ),
+    );
+  }
+}
+
+class _Counter extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return CounterState();
+  }
+}
+
+class CounterState extends State {
+  int _counter = 0;
+
+  void _increment() {
+    setState(() => _counter++);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        RaisedButton(
+          onPressed: _increment,
+          child: Text('Increment'),
+        ),
+        Text('Count: $_counter')
+      ],
     );
   }
 }
@@ -70,7 +95,6 @@ class CustomButton extends StatelessWidget {
 }
 
 class CustomAppBar extends StatelessWidget {
-
   CustomAppBar({this.title});
 
   final Widget title;
