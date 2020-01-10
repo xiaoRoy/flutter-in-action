@@ -45,8 +45,82 @@ class WidgetIntroductionScreen extends StatelessWidget {
   }
 }
 
-class CounterDisplay extends StatelessWidget {
+class ShoppingList extends StatefulWidget {
 
+  ShoppingList({Key key, this.products}):super(key: key);
+  final List<Product> products;
+
+
+  @override
+  State<StatefulWidget> createState() {
+    return null;
+  }
+}
+
+class _ShoppingListState extends State<ShoppingList> {
+  Set<Product> _shoppingCart = Set<Product>();
+
+  void _handleCartChanged(Product product, bool isInCart) {
+    setState(() {
+      if(isInCart) {
+        _shoppingCart.add(product);
+      } else {
+        _shoppingCart.remove(product);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      children: <Widget>[
+
+      ],
+    );
+  }
+}
+
+class Product {
+  const Product({this.name});
+  final String name;
+}
+
+typedef void CartChangedCallback(Product product, bool isInCart);
+
+class ShoppingListItem extends StatelessWidget {
+  ShoppingListItem({Product product, this.isInCart, this.cartChangedCallback})
+      : product = product,
+        super(key: ObjectKey(product));
+  final Product product;
+  final bool isInCart;
+  final CartChangedCallback cartChangedCallback;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: () => cartChangedCallback(product, isInCart),
+      leading: CircleAvatar(
+        backgroundColor: _getColor(context),
+        child: Text(product.name[0]),
+      ),
+      title: Text(product.name, style: _getTextStyle(context)),
+    );
+  }
+
+  Color _getColor(BuildContext context) {
+    return isInCart ? Colors.black54 : Theme.of(context).primaryColor;
+  }
+
+  TextStyle _getTextStyle(BuildContext context) {
+    return isInCart ? null : TextStyle(
+      color: Colors.black54,
+      decoration: TextDecoration.lineThrough,
+    );
+  }
+}
+
+class CounterDisplay extends StatelessWidget {
   CounterDisplay({this.count});
 
   final int count;
@@ -58,7 +132,6 @@ class CounterDisplay extends StatelessWidget {
 }
 
 class CounterIncrementor extends StatelessWidget {
-
   CounterIncrementor({this.onPressed});
 
   final VoidCallback onPressed;
@@ -72,9 +145,6 @@ class CounterIncrementor extends StatelessWidget {
     );
   }
 }
-
-
-
 
 class _Counter extends StatefulWidget {
   @override
@@ -94,8 +164,12 @@ class CounterStateB extends State {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-       CounterIncrementor(onPressed: _increment,),
-       CounterDisplay(count: _counter,)
+        CounterIncrementor(
+          onPressed: _increment,
+        ),
+        CounterDisplay(
+          count: _counter,
+        )
       ],
     );
   }
