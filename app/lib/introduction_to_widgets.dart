@@ -33,7 +33,11 @@ class WidgetIntroductionScreen extends StatelessWidget {
       ),
       body: Container(
         child: Center(
-          child: _Counter(),
+          child: ShoppingList(products: <Product>[
+            Product(name: 'Eggs'),
+            Product(name: 'Milk'),
+            Product(name:'Apples'),
+          ],),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -46,14 +50,12 @@ class WidgetIntroductionScreen extends StatelessWidget {
 }
 
 class ShoppingList extends StatefulWidget {
-
-  ShoppingList({Key key, this.products}):super(key: key);
+  ShoppingList({Key key, this.products}) : super(key: key);
   final List<Product> products;
-
 
   @override
   State<StatefulWidget> createState() {
-    return null;
+    return _ShoppingListState();
   }
 }
 
@@ -62,7 +64,7 @@ class _ShoppingListState extends State<ShoppingList> {
 
   void _handleCartChanged(Product product, bool isInCart) {
     setState(() {
-      if(isInCart) {
+      if (!isInCart) {
         _shoppingCart.add(product);
       } else {
         _shoppingCart.remove(product);
@@ -74,9 +76,13 @@ class _ShoppingListState extends State<ShoppingList> {
   Widget build(BuildContext context) {
     return ListView(
       padding: EdgeInsets.symmetric(vertical: 8.0),
-      children: <Widget>[
-
-      ],
+      children: widget.products.map((Product product) {
+        return ShoppingListItem(
+          product: product,
+          isInCart: _shoppingCart.contains(product),
+          cartChangedCallback: _handleCartChanged,
+        );
+      }).toList(),
     );
   }
 }
@@ -98,6 +104,7 @@ class ShoppingListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('ShoppingListItem.build');
     return ListTile(
       onTap: () => cartChangedCallback(product, isInCart),
       leading: CircleAvatar(
@@ -113,10 +120,12 @@ class ShoppingListItem extends StatelessWidget {
   }
 
   TextStyle _getTextStyle(BuildContext context) {
-    return isInCart ? null : TextStyle(
-      color: Colors.black54,
-      decoration: TextDecoration.lineThrough,
-    );
+    return !isInCart
+        ? null
+        : TextStyle(
+            color: Colors.black54,
+            decoration: TextDecoration.lineThrough,
+          );
   }
 }
 
