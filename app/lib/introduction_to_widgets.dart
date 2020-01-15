@@ -62,6 +62,18 @@ class ShoppingList extends StatefulWidget {
 class _ShoppingListState extends State<ShoppingList> {
   Set<Product> _shoppingCart = Set<Product>();
 
+  @override
+  void initState() {
+    super.initState();
+    print('_ShoppingListState.initSatate()');
+  }
+
+  @override
+  void dispose() {
+    print('_ShoppingListState.dispose()');
+    super.dispose();
+  }
+
   void _handleCartChanged(Product product, bool isInCart) {
     setState(() {
       if (!isInCart) {
@@ -70,6 +82,12 @@ class _ShoppingListState extends State<ShoppingList> {
         _shoppingCart.remove(product);
       }
     });
+  }
+  
+  @override
+  void didUpdateWidget(ShoppingList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print('_ShoppingListState.didUpdateWidget');
   }
 
   @override
