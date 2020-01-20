@@ -18,8 +18,8 @@ class LayoutShowcaseScreen extends StatelessWidget {
         title: Text('Layout Shwocase'),
       ),
       body: Container(
-        // color: Colors.yellowAccent,
-        child: ContactWidget(),
+        color: Colors.yellowAccent,
+        child: FlexibleContainerColumn(),
       ),
     );
   }
@@ -246,6 +246,60 @@ class FlexibleBlueBoxRow extends StatelessWidget {
           child: BlueBox(),
         ),
       ],
+    );
+  }
+}
+
+class FlexibleContainerColumn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        FlexibleContainer(
+          color: Colors.lightBlue,
+          height: 100,
+          felx: 5,
+        ),
+        FlexibleContainer(
+          color: Colors.lightBlue,
+          felx: 2,
+        ),
+        FlexibleContainer(
+          color: Colors.lightBlue,
+          felx: 1,
+        ),
+      ],
+    );
+  }
+}
+
+class FlexibleContainer extends StatelessWidget {
+  final Color color;
+  final int felx;
+  final double width;
+  final double height;
+
+  const FlexibleContainer(
+      {Key key,
+      double width,
+      double height,
+      @required this.color,
+      this.felx = 1})
+      : this.width = width,
+        this.height = height,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      flex: felx,
+      // fit: FlexFit.tight,
+      child: Container(
+        color: color,
+        width: width,
+        height: height,
+        margin: EdgeInsets.symmetric(vertical: 16.0),
+      ),
     );
   }
 }
