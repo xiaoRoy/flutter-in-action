@@ -18,7 +18,30 @@ class MoreLayoutsScreen extends StatelessWidget {
         title: Text('More Layouts'),
       ),
       body: Container(
-        child: BottomTabWidget()
+          child: Align(
+        alignment: Alignment.bottomCenter,
+        child: BottomTabWidget(),
+      )),
+    );
+  }
+}
+
+class NonMaterialApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Center()
+    return Container(
+      decoration: BoxDecoration(color: Colors.white),
+      child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          'Hello World!',
+          textDirection: TextDirection.ltr,
+          style: TextStyle(
+            fontSize: 32,
+            color: Colors.black87,
+          ),
+        ),
       ),
     );
   }
@@ -49,13 +72,11 @@ class BottomTabWidget extends StatelessWidget {
   }
 }
 
-
 class TabWidget extends StatelessWidget {
-
   final Icon icon;
   final String title;
 
-  TabWidget({Key key,this.icon, this.title}) : super(key: key);
+  TabWidget({Key key, this.icon, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
