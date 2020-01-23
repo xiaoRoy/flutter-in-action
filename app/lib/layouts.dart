@@ -17,11 +17,109 @@ class MoreLayoutsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('More Layouts'),
       ),
-      body: Container(
-          child: Align(
-        alignment: Alignment.bottomCenter,
-        child: BottomTabWidget(),
-      )),
+      body: Container(child: StarRating(4, 44)),
+    );
+  }
+}
+
+class StarRating extends StatelessWidget {
+  final int _rating;
+  final int _countOfReview;
+
+  StarRating(this._rating, this._countOfReview);
+
+  List<Icon> _makeTheRating() {
+    final ratingStars = <Icon>[];
+    for (var index = 0; index < 5; index++) {
+      var starColor;
+      if (index < _rating) {
+        starColor = Colors.green[500];
+      } else {
+        starColor = Colors.black;
+      }
+      ratingStars.add(Icon(Icons.star, color: starColor));
+    }
+    return ratingStars;
+  }
+
+  Text _makeReviews() {
+    var review = '$_countOfReview Review';
+    if(_countOfReview != 1){
+      review  += 's';
+    }
+    return Text(review,
+      style: TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.w800,
+        fontFamily: 'Roboto',
+        letterSpacing: 0.5,
+        fontSize: 20
+      ),
+    )
+    ; 
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.all(20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: _makeTheRating(),
+            ),
+            _makeReviews(),
+          ],
+        ));
+  }
+}
+
+class TooLagerImageRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Expanded(
+          child: Image.asset('images/pic1.jpg'),
+        ),
+        Expanded(
+          child: Image.asset('images/pic2.jpg'),
+        ),
+        Expanded(
+          child: Image.asset('images/pic3.jpg'),
+        ),
+      ],
+    );
+  }
+}
+
+class ImageRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Image.asset('images/pic1.jpg'),
+        Image.asset('images/pic2.jpg'),
+        Image.asset('images/pic3.jpg'),
+      ],
+    );
+  }
+}
+
+class ImageColumn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Image.asset('images/pic1.jpg'),
+        Image.asset('images/pic2.jpg'),
+        Image.asset('images/pic3.jpg'),
+      ],
     );
   }
 }
@@ -29,7 +127,6 @@ class MoreLayoutsScreen extends StatelessWidget {
 class NonMaterialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Center()
     return Container(
       decoration: BoxDecoration(color: Colors.white),
       child: Align(
