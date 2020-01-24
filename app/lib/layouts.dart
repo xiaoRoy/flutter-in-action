@@ -22,6 +22,26 @@ class MoreLayoutsScreen extends StatelessWidget {
   }
 }
 
+class HintIcon extends StatelessWidget {
+
+  final Icon _icon;
+  final String _firstHint;
+  final String _secondHint;
+
+  HintIcon(this._icon, this._firstHint, this._secondHint);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        _icon,
+        Text(_firstHint),
+        Text(_secondHint),
+      ],
+    );
+  }
+}
+
 class StarRating extends StatelessWidget {
   final int _rating;
   final int _countOfReview;
