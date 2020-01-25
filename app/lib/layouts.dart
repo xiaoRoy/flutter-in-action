@@ -17,13 +17,104 @@ class MoreLayoutsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('More Layouts'),
       ),
-      body: Container(child: StarRating(4, 44)),
+      body: RecipeInfoWidget(),
     );
   }
 }
 
-class HintIcon extends StatelessWidget {
+class RecipeInfoWidget extends StatelessWidget {
+  final title = Container(
+    padding: EdgeInsets.all(20),
+    child: Text(
+      'Strawberry Pavlova',
+      style: TextStyle(
+        fontWeight: FontWeight.w800,
+        letterSpacing: 0.5,
+        fontSize: 30,
+      ),
+    ),
+  );
 
+  final subtitle = Text(
+    '''avlova is a meringue-based dessert named after the Russian ballerina 
+    Anna Pavlova. Pavlova features a crisp crust and soft, light inside,
+    topped with fruit and whipped cream.
+    ''',
+    textAlign: TextAlign.center,
+    style: TextStyle(
+      fontFamily: 'Georgia',
+      fontSize: 25,
+    ),
+  );
+
+  Image _makeImage() {
+    return Image.asset(
+      'images/pavlova.jpg',
+      fit: BoxFit.cover,
+    );
+  }
+
+  final descTextStyle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.w800,
+    fontFamily: 'Roboto',
+    letterSpacing: 0.5,
+    fontSize: 18,
+    height: 2,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 40, 0, 30),
+      height: 600,
+      child: Card(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              width: 440,
+              child: _makeRecipe(),
+            ),
+            _makeImage(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container _makeRecipe() {
+    return Container(
+      padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
+      child: Column(
+        children: <Widget>[
+          // title, 
+          // subtitle,
+          StarRating(4, 44),
+          _makeHints(),
+        ],
+      ),
+    );
+  }
+
+  Widget _makeHints() {
+    return DefaultTextStyle.merge(
+        style: descTextStyle,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              HintIcon(Icon(Icons.kitchen), 'PREP:', '25 min'),
+              HintIcon(Icon(Icons.timer), 'COOK:', '1 h'),
+              HintIcon(Icon(Icons.restaurant), 'FEEDS:', '4-6'),
+            ],
+          ),
+        ));
+  }
+}
+
+class HintIcon extends StatelessWidget {
   final Icon _icon;
   final String _firstHint;
   final String _secondHint;
@@ -64,19 +155,18 @@ class StarRating extends StatelessWidget {
 
   Text _makeReviews() {
     var review = '$_countOfReview Review';
-    if(_countOfReview != 1){
-      review  += 's';
+    if (_countOfReview != 1) {
+      review += 's';
     }
-    return Text(review,
+    return Text(
+      review,
       style: TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.w800,
-        fontFamily: 'Roboto',
-        letterSpacing: 0.5,
-        fontSize: 20
-      ),
-    )
-    ; 
+          color: Colors.black,
+          fontWeight: FontWeight.w800,
+          fontFamily: 'Roboto',
+          letterSpacing: 0.5,
+          fontSize: 20),
+    );
   }
 
   @override
