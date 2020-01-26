@@ -17,7 +17,7 @@ class MoreLayoutsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('More Layouts'),
       ),
-      body: RecipeInfoWidget(),
+      body: BottomTabWidget(),
     );
   }
 }
