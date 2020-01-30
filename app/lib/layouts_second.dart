@@ -18,7 +18,139 @@ class LayoutSecondScreen extends StatelessWidget {
         title: Text('Layout Second'),
       ),
       // body: ListViewDemostration(ColorItem.converToColorItems(Colors.blue)),
-      body: StackDemostration(),
+      body: ListTitleDemostration(),
+    );
+  }
+}
+
+class ListTitleDemostration extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: <Widget>[
+        _buildOneLineListTile(),
+        _buildOneLineListTileWithLeadingWidget(),
+        _buildOneLineListTitlWithTrailingWidget(),
+        _buildOneLineListTileWithBoth(),
+        _buildOneLineDenseListTile(),
+        _buildListTile(),
+        _buildThreeLineListTile()
+      ],
+    );
+  }
+
+  Widget _buildOneLineListTile() {
+    return Card(child: ListTile(title: Text('One-line ListTile'),));
+  }
+
+  Widget _buildOneLineListTileWithLeadingWidget() {
+    return Card(
+      child: ListTile(
+        leading: FlutterLogo(),
+        title: Text('One-line ListTile with leading widget'),
+      ),
+    );
+  }
+
+  Widget _buildOneLineListTitlWithTrailingWidget() {
+    return Card(
+      child: ListTile(
+        title: Text('One-line ListTile with trailing widget'),
+        trailing: Icon(Icons.more_vert),
+      ),
+    );
+  }
+
+  Widget _buildOneLineListTileWithBoth() {
+    return Card(
+      child: ListTile(
+        leading: FlutterLogo(),
+        title: Text('One-line ListTile with both widgets'),
+        trailing: Icon(Icons.more_vert),
+      ),
+    );
+  }
+
+  Widget _buildOneLineDenseListTile() {
+    return Card(
+      child: ListTile(
+        title: Text('One-line dense ListTile'),
+        dense: true,
+      ),
+    );
+  }
+
+  Widget _buildListTile() {
+    return Card(
+      child: ListTile(
+        leading: FlutterLogo(size: 56.0,),
+        title: Text('Two-line ListTile '),
+        subtitle: Text('Here is a second line'),
+        trailing: Icon(Icons.more_vert),
+        enabled: true,
+        onTap: () {print("When the tile is tapped, the whole row has an ink splash effect.");},
+      ),
+    );
+  }
+
+  Widget _buildThreeLineListTile() {
+    return Card(
+      child: ListTile(
+        isThreeLine: true,
+        leading: FlutterLogo(size: 72.0,),
+        title: Text('Three-line ListTile'),
+        subtitle: Text('A sufficiently long subtitle warrants three lines.'),
+        trailing: Icon(Icons.more_vert),
+      ),
+    );
+  }
+}
+
+class CardDemostration extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 210.0,
+      child: _buildCard(),
+    );
+  }
+
+  Widget _buildCard() {
+    return Card(
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            title: Text(
+              '1625 Main Street',
+              style: TextStyle(fontWeight: FontWeight.w500),
+            ),
+            subtitle: Text('Big City, CA 99944'),
+            leading: Icon(
+              Icons.restaurant_menu,
+              color: Colors.blue[500],
+            ),
+          ),
+          Divider(),
+          ListTile(
+            title: Text(
+              '(408) 555-1212',
+              style: TextStyle(fontWeight: FontWeight.w500),
+            ),
+            leading: Icon(
+              Icons.contact_phone,
+              color: Colors.blue[500],
+            ),
+          ),
+          ListTile(
+            title: Text("what@what.com"),
+            leading: Icon(
+              Icons.email,
+              color: Colors.blue[500],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -30,32 +162,34 @@ class StackDemostration extends StatelessWidget {
   }
 
   Widget _makeStack() {
-    return Stack(
-      children: <Widget>[
-        Container(
-          width: 250,
-          height: 250,
-          color: Colors.grey,
-        ),
-        Container(
-          padding: EdgeInsets.all(5.0),
-          alignment: Alignment.bottomCenter,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: <Color>[
-              Colors.black.withAlpha(0),
-              Colors.black12,
-              Colors.black45,
-            ],
-          )),
-          child: Text(
-            'Foreground Text',
-            style: TextStyle(color: Colors.white, fontSize: 20.0),
+    return SizedBox(
+      width: 250,
+      height: 250,
+      child: Stack(
+        children: <Widget>[
+          Container(
+            color: Colors.yellowAccent,
           ),
-        ),
-      ],
+          Container(
+            margin: EdgeInsets.all(5.0),
+            alignment: Alignment.bottomCenter,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[
+                Colors.black.withAlpha(0),
+                Colors.black12,
+                Colors.black45,
+              ],
+            )),
+            child: Text(
+              'Foreground Text',
+              style: TextStyle(color: Colors.white, fontSize: 20.0),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
