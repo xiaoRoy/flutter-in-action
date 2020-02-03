@@ -1,12 +1,20 @@
 // import 'package:app/layout_showcase.dart';
-import 'package:app/layouts_second.dart';
+// import 'package:app/layouts_second.dart';
+// import 'package:app/layouts_third.dart';
+// import 'package:app/flutter_in_action/chap3/chapter_three.dart';
+import 'package:app/layouts_third.dart';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter/rendering.dart';
+
 // import 'package:app/friendly_chat.dart';
 // import 'package:app/layout_showcase.dart';
 // import 'package:app/introduction_to_widgets.dart';
 // import 'package:app/layouts.dart';
-void main() => runApp((LayoutSecondApp()));
+void main() {
+  // debugPaintSizeEnabled = true;
+  runApp((LayoutsThirdApp()));
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -36,10 +44,8 @@ class StarterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: RandomWords(),
-      theme: ThemeData(
-        primaryColor: Colors.white
-      ),
-      );
+      theme: ThemeData(primaryColor: Colors.white),
+    );
   }
 }
 
@@ -70,32 +76,26 @@ class RandomWordsState extends State<RandomWords> {
   }
 
   void _pushSaved() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (BuildContext builderContext) {
-          final Iterable<ListTile> titles = _savedWordPairs.map(
-            (WordPair wordPair) {
-              return ListTile(
-                title: Text(
-                  wordPair.asPascalCase,
-                  style: _biggerFont,
-                ),
-              );
-            }
-          );
-          final List<Widget> dividedWordPairs = ListTile.divideTiles(
-            context: builderContext,
-            tiles: titles
-          ).toList();
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Saved Suggestions'),
-            ),
-            body: ListView(children: dividedWordPairs),
-          );
-        }
-      )
-    );
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(builder: (BuildContext builderContext) {
+      final Iterable<ListTile> titles =
+          _savedWordPairs.map((WordPair wordPair) {
+        return ListTile(
+          title: Text(
+            wordPair.asPascalCase,
+            style: _biggerFont,
+          ),
+        );
+      });
+      final List<Widget> dividedWordPairs =
+          ListTile.divideTiles(context: builderContext, tiles: titles).toList();
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Saved Suggestions'),
+        ),
+        body: ListView(children: dividedWordPairs),
+      );
+    }));
   }
 
   Widget _buildRow(WordPair wordPair) {

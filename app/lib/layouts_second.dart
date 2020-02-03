@@ -18,13 +18,166 @@ class LayoutSecondScreen extends StatelessWidget {
         title: Text('Layout Second'),
       ),
       // body: ListViewDemostration(ColorItem.converToColorItems(Colors.blue)),
-      body: ListTitleDemostration(),
+      body: ArtilceList(),
+    );
+  }
+}
+
+class ArtilceList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: EdgeInsets.all(10.0),
+      children: <Widget>[
+        ArticleItem(
+          thumbnail: Container(
+            decoration: const BoxDecoration(color: Colors.pink),
+          ),
+          title: 'Flutter 1.0 Launch',
+          subtitle: 'Flutter continues to improve and expand its horizons'
+              'This text should max out at two lines and clip',
+          author: 'Dash',
+          publishDate: 'Dec 28',
+          readDuration: '5 mins',
+        ),
+        ArticleItem(
+          thumbnail: Container(
+            color: Colors.blue,
+          ),
+          title: 'Flutter 1.2 Release - Continual updates to the framework',
+          subtitle: 'Flutter once again improves and makes updates.',
+          author: 'Flutter',
+          publishDate: 'Feb 26',
+          readDuration: '12 mins',
+        )
+      ],
+    );
+  }
+}
+
+class ArticleItem extends StatelessWidget {
+  final Widget thumbnail;
+  final String title;
+  final String subtitle;
+  final String author;
+  final String publishDate;
+  final String readDuration;
+
+  ArticleItem({
+    Key key,
+    this.thumbnail,
+    this.title,
+    this.subtitle,
+    this.author,
+    this.publishDate,
+    this.readDuration,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: SizedBox(
+        height: 100,
+        child: Row(
+          children: <Widget>[
+            AspectRatio(
+              aspectRatio: 1.0,
+              child: thumbnail,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
+                child: ArticleDescription(
+                  title: title,
+                  subtitle: subtitle,
+                  author: author,
+                  publishDate: publishDate,
+                  readDuration: readDuration,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ArticleDescription extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final String author;
+  final String publishDate;
+  final String readDuration;
+
+  ArticleDescription(
+      {Key key,
+      this.title,
+      this.subtitle,
+      this.author,
+      this.publishDate,
+      this.readDuration})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 2.0),
+                ),
+                Text(
+                  subtitle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontSize: 12.0, color: Colors.black54),
+                ),
+              ],
+            )),
+        Expanded(
+          flex: 1,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                author,
+                style: const TextStyle(
+                  fontSize: 12.0,
+                  color: Colors.black87,
+                ),
+              ),
+              Text(
+                '$publishDate · $readDuration',
+                style: const TextStyle(
+                  fontSize: 12.0,
+                  color: Colors.black54,
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }
 
 class ListTitleDemostration extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -41,7 +194,10 @@ class ListTitleDemostration extends StatelessWidget {
   }
 
   Widget _buildOneLineListTile() {
-    return Card(child: ListTile(title: Text('One-line ListTile'),));
+    return Card(
+        child: ListTile(
+      title: Text('One-line ListTile'),
+    ));
   }
 
   Widget _buildOneLineListTileWithLeadingWidget() {
@@ -84,12 +240,17 @@ class ListTitleDemostration extends StatelessWidget {
   Widget _buildListTile() {
     return Card(
       child: ListTile(
-        leading: FlutterLogo(size: 56.0,),
+        leading: FlutterLogo(
+          size: 56.0,
+        ),
         title: Text('Two-line ListTile '),
         subtitle: Text('Here is a second line'),
         trailing: Icon(Icons.more_vert),
         enabled: true,
-        onTap: () {print("When the tile is tapped, the whole row has an ink splash effect.");},
+        onTap: () {
+          print(
+              "When the tile is tapped, the whole row has an ink splash effect.");
+        },
       ),
     );
   }
@@ -98,7 +259,9 @@ class ListTitleDemostration extends StatelessWidget {
     return Card(
       child: ListTile(
         isThreeLine: true,
-        leading: FlutterLogo(size: 72.0,),
+        leading: FlutterLogo(
+          size: 72.0,
+        ),
         title: Text('Three-line ListTile'),
         subtitle: Text('A sufficiently long subtitle warrants three lines.'),
         trailing: Icon(Icons.more_vert),
