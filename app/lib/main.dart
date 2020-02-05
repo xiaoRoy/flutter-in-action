@@ -13,7 +13,7 @@ import 'package:flutter/rendering.dart';
 // import 'package:app/layouts.dart';
 void main() {
   // debugPaintSizeEnabled = true;
-  runApp((LayoutsThirdApp()));
+  runApp(CampingInfoApp());
 }
 
 class MyApp extends StatelessWidget {
