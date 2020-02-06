@@ -121,9 +121,10 @@ class FavoriteTapBoxState extends State<FavoriteTapBoxWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FavoriteWidget(_count, _isFavorited, _handleFavoriteChanged),
-    );
+    // return Container(
+    //   child: FavoriteWidget(_count, _isFavorited, _handleFavoriteChanged),
+    // );
+    return FavoriteWidget(_count, _isFavorited, _handleFavoriteChanged);
   }
 }
 
@@ -144,7 +145,10 @@ class FavoriteWidget extends StatelessWidget {
             Icons.favorite,
             color: isFavorited ? Colors.red[500] : Colors.grey[500],
           ),
-          Text('$count'),
+          SizedBox(
+            width: 18,
+            child: Text('$count'),
+          ),
         ],
       ),
     );
@@ -177,25 +181,29 @@ class CampingInfoScreen extends StatelessWidget {
       padding: const EdgeInsets.all(32),
       child: Row(
         children: <Widget>[
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Text(
-                    campingInfo.title,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Text(
-                  campingInfo.subtitle,
-                  style: TextStyle(color: Colors.grey[500]),
-                )
-              ],
+          _makeTitles(),
+          FavoriteTapBoxWidget(campingInfo.likeCount, campingInfo.isFavorited)
+        ],
+      ),
+    );
+  }
+
+  Widget _makeTitles() {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Text(
+              campingInfo.title,
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          FavoriteTapBoxWidget(campingInfo.likeCount, campingInfo.isFavorited)
+          Text(
+            campingInfo.subtitle,
+            style: TextStyle(color: Colors.grey[500]),
+          )
         ],
       ),
     );
@@ -206,24 +214,7 @@ class CampingInfoScreen extends StatelessWidget {
       padding: const EdgeInsets.all(32),
       child: Row(
         children: <Widget>[
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Text(
-                    campingInfo.title,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Text(
-                  campingInfo.subtitle,
-                  style: TextStyle(color: Colors.grey[500]),
-                )
-              ],
-            ),
-          ),
+          _makeTitles(),
           Icon(
             Icons.favorite,
             color: campingInfo.isFavorited ? Colors.red[500] : Colors.grey[500],
