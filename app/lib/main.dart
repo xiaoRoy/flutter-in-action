@@ -3,7 +3,8 @@
 // import 'package:app/layouts_third.dart';
 // import 'package:app/flutter_in_action/chap3/chapter_three.dart';
 // import 'package:app/layouts_third.dart';
-import 'package:app/managing_state.dart';
+// import 'package:app/managing_state.dart';
+import 'package:app/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/rendering.dart';
@@ -14,7 +15,7 @@ import 'package:flutter/rendering.dart';
 // import 'package:app/layouts.dart';
 void main() {
   // debugPaintSizeEnabled = true;
-  runApp(ManagingStateApp());
+  runApp(NavigationApp());
 }
 
 class MyApp extends StatelessWidget {
