@@ -14,7 +14,7 @@ import 'package:flutter/rendering.dart';
 // import 'package:app/introduction_to_widgets.dart';
 // import 'package:app/layouts.dart';
 void main() {
-  debugPaintSizeEnabled = true;
+  // debugPaintSizeEnabled = true;
   runApp(NavigationApp());
 }
 

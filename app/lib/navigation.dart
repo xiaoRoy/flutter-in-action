@@ -116,14 +116,9 @@ class SelectionScreen extends StatelessWidget {
 class SelectionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      onPressed: () {
-        _navigateToSelectionScreen(context);
-        
-      },
-      child: Text('Pick an option, any option!'
-      // ,style: TextStyle(fontSize: 44),
-      ),
+    return NavigationButton(
+      description: 'Pick an option, any option!',
+      navigation: _navigateToSelectionScreen,
     );
   }
 
@@ -179,17 +174,26 @@ class FirstRoute extends StatelessWidget {
       ),
       body: Center(
           child: Column(
-            
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          NavigationButton(description: 'Navigate to Second Route', navigation: _navigateToSecondRouteNamed,),
-          NavigationButton(description: 'Navigate to Third Route', navigation: _navigateToThirdScreen,),
-          // Padding(padding: EdgeInsets.symmetric(vertical: 4.0),),
-          NavigationButton(description: 'Navigate to Fourth Route', navigation: _navigateToFourScreen,),
+          NavigationButton(
+            description: 'Navigate to Second Route',
+            navigation: _navigateToSecondRouteNamed,
+          ),
+          NavigationButton(
+            description: 'Navigate to Third Route',
+            navigation: _navigateToThirdScreen,
+          ),
+          NavigationButton(
+            description: 'Navigate to Fourth Route',
+            navigation: _navigateToFourScreen,
+          ),
           SelectionButton(),
-          NavigationButton(description: 'Navigate to Todo List', navigation: _navigateTodoList,),
-          SelectionButton(),
+          NavigationButton(
+            description: 'Navigate to Todo List',
+            navigation: _navigateTodoList,
+          ),
         ],
       )),
     );
@@ -210,18 +214,17 @@ class NavigationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(0.0),
+    return Container(
+      margin: EdgeInsets.all(8.0),
       child: SizedBox(
-        width: double.infinity,
-        height: 36.0,
-        child: RaisedButton(
-
-          onPressed: () {
-            navigation(context);
-          },
-          child: Text(description),
-        )),
+          width: double.infinity,
+          height: 36.0,
+          child: RaisedButton(
+            onPressed: () {
+              navigation(context);
+            },
+            child: Text(description),
+          )),
     );
   }
 }
