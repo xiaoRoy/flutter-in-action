@@ -1,3 +1,4 @@
+import 'package:english_words/english_words.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +13,14 @@ class NavigationApp extends StatelessWidget {
 
   static const selectionRoute = '${homeRoute}selection';
 
+  static const todoListRoute = '${homeRoute}todoList';
+
   final _routes = {
     homeRoute: (BuildContext context) => FirstRoute(),
     secondRoute: (BuildContext context) => SecondRoute(),
     thirdRoute: (BuildContext context) => ThirdScreen(),
-    selectionRoute: (BuildContext context) => SelectionScreen(),
+    todoListRoute: (cotext) => TodoListRoute(),
+    // selectionRoute: (BuildContext context) => SelectionScreen(),
   };
 
   Route<dynamic> _onGenerateRoute(RouteSettings routeSettings) {
@@ -40,12 +44,46 @@ class NavigationApp extends StatelessWidget {
   }
 }
 
-class SelectionScreen extends StatelessWidget {
+class TodoListRoute extends StatelessWidget {
+  final todos = List<Todo>.generate(44, (index) {
+    return Todo('Todo $index',
+        'A description of what needs to be done for Todo $index');
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Pick an option'),),
+      appBar: AppBar(
+        title: Text('Todo List'),
+      ),
+      body: ListView(
+        padding: EdgeInsets.all(8.0),
+        children: todos.map((Todo todo) {
+          return Card(
+            child: ListTile(
+              title: Text(todo.title),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
+class Todo {
+  final title;
+  final description;
+
+  Todo(this.title, this.description);
+}
+
+class SelectionScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Pick an option'),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -81,13 +119,24 @@ class SelectionButton extends StatelessWidget {
     return RaisedButton(
       onPressed: () {
         _navigateToSelectionScreen(context);
+        
       },
-      child: Text('Pick an option, any option!'),
+      child: Text('Pick an option, any option!'
+      // ,style: TextStyle(fontSize: 44),
+      ),
     );
   }
 
-  void _navigateToSelectionScreen(BuildContext context) {
-    Navigator.pushNamed(context, NavigationApp.selectionRoute);
+  void _navigateToSelectionScreen(BuildContext context) async {
+    final String result = await Navigator.push(context,
+        MaterialPageRoute<String>(builder: (context) {
+      return SelectionScreen();
+    }));
+    Scaffold.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        content: Text(result),
+      ));
   }
 }
 
@@ -118,6 +167,10 @@ class FirstRoute extends StatelessWidget {
         arguments: screenInfo);
   }
 
+  void _navigateTodoList(BuildContext context) {
+    Navigator.pushNamed(context, NavigationApp.todoListRoute);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,30 +179,49 @@ class FirstRoute extends StatelessWidget {
       ),
       body: Center(
           child: Column(
+            
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          RaisedButton(
-            onPressed: () {
-              _navigateToSecondRouteNamed(context);
-            },
-            child: Text('Navigate to Second Route'),
-          ),
-          RaisedButton(
-            onPressed: () {
-              _navigateToThirdScreen(context);
-            },
-            child: Text('Navigate ot Third Route'),
-          ),
-          RaisedButton(
-            onPressed: () {
-              _navigateToFourScreen(context);
-            },
-            child: Text('Navigate ot Fourth Route'),
-          ),
-          SelectionButton()
+          NavigationButton(description: 'Navigate to Second Route', navigation: _navigateToSecondRouteNamed,),
+          NavigationButton(description: 'Navigate to Third Route', navigation: _navigateToThirdScreen,),
+          // Padding(padding: EdgeInsets.symmetric(vertical: 4.0),),
+          NavigationButton(description: 'Navigate to Fourth Route', navigation: _navigateToFourScreen,),
+          SelectionButton(),
+          NavigationButton(description: 'Navigate to Todo List', navigation: _navigateTodoList,),
+          SelectionButton(),
         ],
       )),
+    );
+  }
+}
+
+typedef void Navigation(BuildContext context);
+
+class NavigationButton extends StatelessWidget {
+  final String description;
+  final Navigation navigation;
+
+  NavigationButton(
+      {Key key, @required String description, @required Navigation navigation})
+      : this.description = description,
+        this.navigation = navigation,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(0.0),
+      child: SizedBox(
+        width: double.infinity,
+        height: 36.0,
+        child: RaisedButton(
+
+          onPressed: () {
+            navigation(context);
+          },
+          child: Text(description),
+        )),
     );
   }
 }
