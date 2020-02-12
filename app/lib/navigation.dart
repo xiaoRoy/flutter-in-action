@@ -44,11 +44,38 @@ class NavigationApp extends StatelessWidget {
   }
 }
 
+class TodoDetailPage extends StatelessWidget {
+  final Todo todo;
+
+  TodoDetailPage({Key key, @required this.todo}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(todo.title),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text(todo.description),
+      ),
+    );
+  }
+}
+
 class TodoListRoute extends StatelessWidget {
   final todos = List<Todo>.generate(44, (index) {
     return Todo('Todo $index',
         'A description of what needs to be done for Todo $index');
   });
+
+  void _navigateTodoDetail(BuildContext context, Todo todo) {
+    Navigator.push(context, MaterialPageRoute<void>(builder: (context) {
+      return TodoDetailPage(
+        todo: todo,
+      );
+    }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +86,14 @@ class TodoListRoute extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(8.0),
         children: todos.map((Todo todo) {
-          return Card(
-            child: ListTile(
-              title: Text(todo.title),
+          return GestureDetector(
+            onTap: () {
+              _navigateTodoDetail(context, todo);
+            },
+            child: Card(
+              child: ListTile(
+                title: Text(todo.title),
+              ),
             ),
           );
         }).toList(),
