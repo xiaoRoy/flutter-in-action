@@ -1,4 +1,5 @@
-import 'package:english_words/english_words.dart';
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -44,10 +45,20 @@ class NavigationApp extends StatelessWidget {
   }
 }
 
-class TodoDetailPage extends StatelessWidget {
+class TodoDetailBPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final Todo todo = ModalRoute.of(context).settings.arguments;
+    return TodoDetailScaffold(todo: todo);
+  }
+}
+
+class TodoDetailScaffold extends StatelessWidget {
   final Todo todo;
 
-  TodoDetailPage({Key key, @required this.todo}) : super(key: key);
+  TodoDetailScaffold({Key key, @required Todo todo})
+      : this.todo = todo,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,18 +74,37 @@ class TodoDetailPage extends StatelessWidget {
   }
 }
 
+class TodoDetailPage extends StatelessWidget {
+  final Todo todo;
+
+  TodoDetailPage({Key key, @required this.todo}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TodoDetailScaffold(todo: todo);
+  }
+}
+
 class TodoListRoute extends StatelessWidget {
   final todos = List<Todo>.generate(44, (index) {
     return Todo('Todo $index',
         'A description of what needs to be done for Todo $index');
   });
 
-  void _navigateTodoDetail(BuildContext context, Todo todo) {
+  void _navigateToTodoDetail(BuildContext context, Todo todo) {
     Navigator.push(context, MaterialPageRoute<void>(builder: (context) {
-      return TodoDetailPage(
-        todo: todo,
-      );
+      return TodoDetailPage(todo: todo);
     }));
+  }
+
+  void _navigateToTodoDetailB(BuildContext context, Todo todo) {
+    Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+            builder: (context) {
+              return TodoDetailBPage();
+            },
+            settings: RouteSettings(arguments: todo)));
   }
 
   @override
@@ -85,10 +115,16 @@ class TodoListRoute extends StatelessWidget {
       ),
       body: ListView(
         padding: EdgeInsets.all(8.0),
-        children: todos.map((Todo todo) {
+        children: todos.asMap().entries.map((MapEntry<int, Todo> entry) {
+          final index = entry.key;
+          final todo = entry.value;
           return GestureDetector(
             onTap: () {
-              _navigateTodoDetail(context, todo);
+              if (index % 2 == 0) {
+                _navigateToTodoDetail(context, todo);
+              } else {
+                _navigateToTodoDetailB(context, todo);
+              }
             },
             child: Card(
               child: ListTile(
@@ -225,6 +261,10 @@ class FirstRoute extends StatelessWidget {
           NavigationButton(
             description: 'Navigate to Todo List',
             navigation: _navigateTodoList,
+          ),
+          NavigationButton(
+            description: 'Navigate To Animation',
+            navigation: (context) => Void,
           ),
         ],
       )),
