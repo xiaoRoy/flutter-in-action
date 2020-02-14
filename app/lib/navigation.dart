@@ -16,11 +16,14 @@ class NavigationApp extends StatelessWidget {
 
   static const todoListRoute = '${homeRoute}todoList';
 
+  static const animationRoute = '${homeRoute}animation';
+
   final _routes = {
     homeRoute: (BuildContext context) => FirstRoute(),
     secondRoute: (BuildContext context) => SecondRoute(),
     thirdRoute: (BuildContext context) => ThirdScreen(),
     todoListRoute: (cotext) => TodoListRoute(),
+    animationRoute: (_) => AnimationMainPage(),
     // selectionRoute: (BuildContext context) => SelectionScreen(),
   };
 
@@ -41,6 +44,46 @@ class NavigationApp extends StatelessWidget {
       initialRoute: homeRoute,
       routes: _routes,
       onGenerateRoute: _onGenerateRoute,
+    );
+  }
+}
+
+class AnimationSecondPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Center(
+          child: FlutterHero(),
+        ),
+      ),
+    );
+  }
+}
+
+class FlutterHero extends Hero {
+  static const imageUrl =
+      'https://flutter.dev/assets/flutter-lockup-c13da9c9303e26b8d5fc208d2a1fa20c1ef47eb021ecadf27046dea04c0cebf6.png';
+  FlutterHero({Key key})
+      : super(key: key, tag: "flutterHero", child: Image.network(imageUrl));
+}
+
+class AnimationMainPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Animation Main'),
+      ),
+      body: GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AnimationSecondPage()));
+          },
+          child: FlutterHero()),
     );
   }
 }
@@ -234,6 +277,10 @@ class FirstRoute extends StatelessWidget {
     Navigator.pushNamed(context, NavigationApp.todoListRoute);
   }
 
+  void _navigateToAnimationPage(BuildContext context) {
+    Navigator.pushNamed(context, NavigationApp.animationRoute);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -264,7 +311,7 @@ class FirstRoute extends StatelessWidget {
           ),
           NavigationButton(
             description: 'Navigate To Animation',
-            navigation: (context) => Void,
+            navigation: _navigateToAnimationPage,
           ),
         ],
       )),
